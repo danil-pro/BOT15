@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <a href="{{ url_for('logout') }}" class="button logout-button">Logout</a>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <h2>Translators</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Language Level</th>
+                    <th>Price (€/hr)</th>
+                    <th>Contact</th>
+                    <th>Banned</th>
+                    <th>Actions</th>
+                    <th>Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for translator in translators %}
+                    <tr>
+                        <td data-label="ID">{{ translator.id }}</td>
+                        <td data-label="Name">{{ translator.name or 'N/A' }}</td>
+                        <td data-label="City">{{ translator.city or 'N/A' }}</td>
+                        <td data-label="Language Level">{{ translator.language_level or 'N/A' }}</td>
+                        <td data-label="Price (€/hr)">{{ translator.price or 'N/A' }}</td>
+                        <td data-label="Contact">{{ translator.contact or 'N/A' }}</td>
+                        <td data-label="Banned">{{ 'Yes' if translator.banned else 'No' }}</td>
+                        <td data-label="Actions">
+                            {% if not translator.banned %}
+                                <form action="{{ url_for('ban_user', user_id=translator.id) }}" method="post" style="display:inline;">
+                                    <button type="submit" class="button ban-button">Ban</button>
+                                </form>
+                            {% else %}
+                                <form action="{{ url_for('unban_user', user_id=translator.id) }}" method="post" style="display:inline;">
+                                    <button type="submit" class="button unban-button">Unban</button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Clients</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>City</th>
+                    <th>Verified</th>
+                    <th>Activity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td data-label="ID">{{ client.id }}</td>
+                        <td data-label="City">{{ client.city or 'N/A' }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Banned Users</h2>
+        <ul>
+            {% for user in banned_users %}
+                <li>{{ user.id }} - {{ user.role }} - {{ user.name or user.city or 'N/A' }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Muted Words</h2>
+        <form action="{{ url_for('mute_word') }}" method="post" class="mute-form">
+            <input type="text" name="word" placeholder="Enter word to mute" required>
+            <button type="submit" class="button mute-button">Mute Word</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for word in muted_words %}
+                    <tr>
+                        <td data-label="Word">{{ word }}</td>
+                        <td data-label="Action">
+                            <form action="{{ url_for('unmute_word', word=word) }}" method="post" style="display:inline;">
+                                <button type="submit" class="button unmute-button">Unmute</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,248 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #d1e0ff; /* Light blue background for contrast */
+    color: #1a202c;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 20px; /* More rounded */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Bigger shadow */
+}
+
+h1, h2 {
+    color: #2b6cb0; /* Bright blue headings */
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 3em; /* Larger */
+    text-align: center;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: 600;
+    border-bottom: 3px solid #63b3ed; /* Thicker, colorful border */
+    padding-bottom: 10px;
+}
+
+/* Buttons */
+.button {
+    display: inline-block;
+    padding: 10px 20px; /* Larger buttons */
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    transform: scale(1.05); /* Bigger hover effect */
+}
+
+.logout-button {
+    background-color: #e53e3e;
+    float: right;
+}
+
+.logout-button:hover {
+    background-color: #9b2c2c; /* Darker red */
+}
+
+.ban-button {
+    background-color: #e53e3e;
+}
+
+.ban-button:hover {
+    background-color: #9b2c2c;
+}
+
+.unban-button {
+    background-color: #48bb78;
+}
+
+.unban-button:hover {
+    background-color: #2f855a;
+}
+
+.track-button {
+    background-color: #48bb78;
+}
+
+.track-button:hover {
+    background-color: #2f855a;
+}
+
+.mute-button {
+    background-color: #ed8936;
+}
+
+.mute-button:hover {
+    background-color: #c05621;
+}
+
+.unmute-button {
+    background-color: #4299e1;
+}
+
+.unmute-button:hover {
+    background-color: #2b6cb0;
+}
+
+/* Flash Messages */
+.flash {
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    border: 2px solid; /* Added border */
+}
+
+.flash.success {
+    background-color: #c6f6d5;
+    color: #276749;
+    border-color: #68d391;
+}
+
+.flash.error {
+    background-color: #fed7d7;
+    color: #9b2c2c;
+    border-color: #f56565;
+}
+
+.flash.info {
+    background-color: #bee3f8;
+    color: #2c5282;
+    border-color: #4299e1;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    background-color: #f7fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+th {
+    background-color: #63b3ed; /* Bright blue header */
+    font-weight: 700;
+    color: #fff;
+}
+
+td {
+    vertical-align: middle;
+}
+
+tr:hover {
+    background-color: #e9f2ff; /* Light blue hover */
+}
+
+/* Responsive Tables */
+@media screen and (max-width: 600px) {
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+    thead {
+        display: none;
+    }
+    tr {
+        display: block;
+        margin-bottom: 20px;
+        border: 2px solid #63b3ed;
+        border-radius: 10px;
+    }
+    td {
+        display: block;
+        text-align: right;
+        border-bottom: none;
+        position: relative;
+        padding-left: 50%;
+    }
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 16px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 700;
+        color: #2b6cb0;
+    }
+}
+
+/* Mute Form */
+.mute-form {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mute-form input[type="text"] {
+    padding: 10px 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    flex-grow: 1;
+    max-width: 340px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mute-form input[type="text"]:focus {
+    border-color: #4299e1;
+    box-shadow: 0 0 8px rgba(66, 153, 225, 0.3);
+    outline: none;
+}
+
+.mute-form button {
+    padding: 10px 20px;
+}
+
+/* Lists */
+ul {
+    list-style-type: none;
+    margin-bottom: 30px;
+    background-color: #f7fafc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+ul li {
+    padding: 14px 16px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
