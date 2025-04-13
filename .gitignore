@@ -10,9 +10,8 @@ env/
 ENV/
 
 # Environment variables
-.env
-.env.*
 
+1
 # Logs
 *.log
 
@@ -50,4 +49,3 @@ dist/
 coverage.xml
 htmlcov/
 
-user_data2.db
